@@ -50,6 +50,15 @@ async function run() {
       res.send(result);
     })
 
+    // email query
+
+    app.get('/spots-by-email/:email', async (req, res) => {
+
+      console.log(req.params.email)
+     const result=await spotCollection.find({email:req.params.email}).toArray ();
+     res.send(result)
+  });
+
     app.post('/new-spot',async(req,res)=>{
      const newTouristSpot=req.body;
      console.log(newTouristSpot);
