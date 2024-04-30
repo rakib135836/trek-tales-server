@@ -43,6 +43,19 @@ async function run() {
 
     const spotCollection = client.db('spotDB').collection('spot');
 
+// new collection for country section 
+   const countryCollection =client.db('countryDB').collection('country')
+
+
+// getting countries
+
+
+    app.get('/countries',async(req,res)=>{
+      const cursor=countryCollection.find();
+      const result=await cursor.toArray();
+      res.send(result);
+    })
+
 
     app.get('/new-spot', async (req, res) => {
       const cursor = spotCollection.find();
@@ -75,6 +88,10 @@ async function run() {
       const result = await spotCollection.insertOne(newTouristSpot);
       res.send(result);
     })
+
+
+   
+    
 
 
     app.put('/new-spot/:id', async (req, res) => {
