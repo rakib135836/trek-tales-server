@@ -5,9 +5,39 @@ require('dotenv').config()
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+// 1
 // middleWire
 app.use(cors());
+
+
+// 2
+// app.use(cors (
+//   {
+//   origin:["http://localhost:5173/"],
+//   credentials:true
+//   }
+//   ))
+
+
+// 3
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+
+// 4
+
+// const  corsOptions={
+//   origin:"*",
+//   methods:["GET","PUT","PATCH","DELETE","OPTIONS"],
+//   allowedHeaders:["Content-Type"],
+// }
+
+// app.use(cors(corsOptions));
+// app.options("*",cors(corsOptions));
+
 app.use(express.json());
 
 
@@ -39,7 +69,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+  
 
     const spotCollection = client.db('spotDB').collection('spot');
 
